@@ -12,24 +12,25 @@ export default class AlunoController {
     const { email, senha } = crendeciais;
 
     Validador.validarParametros([{ email }, { senha }]);
-    const usuario = await UsuarioRepository.obter({ email });
-
-    // #pegabandeira
-    if (!usuario) {
+    const user = await UsuarioRepository.obter({ email });
+    const password = await Validador.validarSenha(senha, user.senha);
+  
+    // #pegabandeira resolvido
+    if (email != user.email) {
       throw new UnauthorizedException('Usuario ou senha invalidos');
     }
 
-    await Validador.validarSenha(senha, usuario.senha);
-
-    const accessToken = jwt.sign({ email: usuario.email, tipo: usuario.tipo }, config.auth.secret, {
-      expiresIn: config.auth.expiresIn,
-    });
+    const accessToken = jwt.sign(
+      { email: user.email, tipo: user.tipo },
+      config.auth.secret,
+      {expiresIn: config.auth.expiresIn}
+    );
 
     return {
       usuario: {
-        email: usuario.email,
-        nome: usuario.nome,
-        tipo: usuario.tipo,
+        email: user.email,
+        nome: user.nome,
+        tipo: user.tipo,
       },
       token: accessToken,
       expires: getTime(Date.now() / 1000) + 604800,

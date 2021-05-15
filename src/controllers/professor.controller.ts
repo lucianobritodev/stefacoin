@@ -20,11 +20,11 @@ export default class ProfessorController {
     return await ProfessorRepository.listar(filtro);
   }
 
-  // #pegabandeira
+  // #pegabandeira resolvido
   async incluir(professor: Professor) {
-    const { nome, email, senha } = professor;
+    const { nome, email, senha, curso } = professor;
 
-    Validador.validarParametros([{ nome }, { email }, { senha }]);
+    Validador.validarParametros([{ nome }, { email }, { senha }, { curso }]);
     professor.tipo = 1;
 
     const id = await ProfessorRepository.incluir(professor);
