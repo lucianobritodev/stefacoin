@@ -4,7 +4,7 @@ import UnauthorizedException from '../utils/exceptions/unauthorized.exception';
 
 export const Validador = {
   validarParametros: (parametros: any[]) => {
-    if (!parametros) return true;
+    if (!parametros) return true; // Linha antes de auterar 
 
     const parametrosInvalidos = parametros
       .filter((p) => {

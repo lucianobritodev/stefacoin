@@ -61,7 +61,7 @@ Você terá de descobrir o que precisa ser feito
 backend:
 database.ts
 database.json
-exceptions \*
+exceptions
 repository.ts
 config.ts
 tipo-usuario.enum.ts
