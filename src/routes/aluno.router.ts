@@ -5,7 +5,7 @@ import Mensagem from '../utils/mensagem';
 
 const router = express.Router();
 
-router.post('/aluno', async (req: Request, res: Response, next: NextFunction) => {
+ router.post('/aluno', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const mensagem: Mensagem = await new AlunoController().incluir(req.body);
     res.json(mensagem);
